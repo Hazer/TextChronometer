@@ -68,6 +68,49 @@ public class DateRenderer {
         return new TimeAgo(lastUnit, formattedDate);
     }
 
+    /**
+     * Converts a timestamp to how long left syntax
+     *
+     * @param time The time in milliseconds
+     * @return The formatted time
+     */
+    public TimeAgo timeLeft(double time) {
+
+        TimeAgo result = null;
+
+        Unit[] units = new Unit[]
+                {
+                        new Unit(SECONDS, sec, secs, 60, 1),
+                        new Unit(MINUTES, min, mins, 3600, 60),
+                        new Unit(HOURS, hour, hours, 86400, 3600),
+                        new Unit(DAYS, day, days, 604800, 86400)
+                };
+
+        long currentTime = System.currentTimeMillis();
+        int difference = (int) ((time - currentTime) / 1000);
+
+        if (difference < 5) {
+            return new TimeAgo(units[0], now);
+        }
+
+        String formattedDate = null;
+        Unit lastUnit = null;
+        for (Unit unit : units) {
+            if (difference < unit.limit) {
+                formattedDate = getFormattedDate(unit, difference);
+                lastUnit = unit;
+                break;
+            }
+        }
+
+        if (formattedDate == null) {
+            lastUnit = units[units.length - 1];
+            formattedDate = getFormattedDate(lastUnit, difference);
+        }
+
+        return new TimeAgo(lastUnit, formattedDate);
+    }
+
     private String getFormattedDate(Unit unit, int difference) {
         int newDiff = (int) Math.floor(difference / unit.inSeconds);
         String resultValue = newDiff + " " + (newDiff <= 1? unit.name : unit.pluralName);

@@ -15,7 +15,7 @@ import android.widget.TextView;
  * Date: 22/07/2013
  * Time: 08:00
  */
-public class TextChronometer extends TextView {
+public class TimeAgoTextView extends TextView {
 
     private boolean isAttached;
     private long time;
@@ -32,15 +32,15 @@ public class TextChronometer extends TextView {
 
     private Runnable ticker;
 
-    public TextChronometer(Context context) {
+    public TimeAgoTextView(Context context) {
         this(context, null, 0);
     }
 
-    public TextChronometer(Context context, AttributeSet attrs) {
+    public TimeAgoTextView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public TextChronometer(Context context, AttributeSet attrs, int defStyle) {
+    public TimeAgoTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context);
     }

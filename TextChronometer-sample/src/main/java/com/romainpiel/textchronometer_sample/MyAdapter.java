@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.romainpiel.textchronometer.TextChronometer;
+import com.romainpiel.textchronometer.TimeAgoTextView;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,7 @@ public class MyAdapter extends ArrayAdapter<Entry> {
 
     public static class ViewHolder {
         public TextView item1;
-        public TextChronometer item2;
+        public TimeAgoTextView item2;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class MyAdapter extends ArrayAdapter<Entry> {
             v = vi.inflate(R.layout.my_item, null);
             holder = new ViewHolder();
             holder.item1 = (TextView) v.findViewById(R.id.title);
-            holder.item2 = (TextChronometer) v.findViewById(R.id.timestamp);
+            holder.item2 = (TimeAgoTextView) v.findViewById(R.id.timestamp);
             v.setTag(holder);
         } else
             holder = (ViewHolder) v.getTag();
