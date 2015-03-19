@@ -5,12 +5,14 @@ import android.content.Context;
 
 public class DateRenderer {
 
-    public static final String SECONDS = "seconds";
-    public static final String MINUTES = "minutes";
-    public static final String HOURS = "hours";
-    public static final String DAYS = "days";
+    public static final String SECONDS = "segundos";
+    public static final String MINUTES = "minutos";
+    public static final String HOURS = "horas";
+    public static final String DAYS = "dias";
+    public static final String WEEKS = "semanas";
+    public static final String MONTHS = "meses";
 
-    private final String ago, now, sec, secs, min, mins, hour, hours, day, days;
+    private final String ago, now, sec, secs, min, mins, hour, hours, day, days, week, weeks, month, months;
 
     public DateRenderer(Context ctx) {
         ago = ctx.getString(R.string.general_timeAgo_);
@@ -23,6 +25,10 @@ public class DateRenderer {
         hours = ctx.getString(R.string.general_hours);
         day = ctx.getString(R.string.general_day);
         days = ctx.getString(R.string.general_days);
+        week = ctx.getString(R.string.general_week);
+        weeks = ctx.getString(R.string.general_weeks);
+        month = ctx.getString(R.string.general_month);
+        months = ctx.getString(R.string.general_months);
     }
 
     /**
@@ -32,15 +38,14 @@ public class DateRenderer {
      * @return The formatted time
      */
     public TimeAgo timeAgo(double time) {
-
-        TimeAgo result = null;
-
         Unit[] units = new Unit[]
                 {
                         new Unit(SECONDS, sec, secs, 60, 1),
                         new Unit(MINUTES, min, mins, 3600, 60),
                         new Unit(HOURS, hour, hours, 86400, 3600),
-                        new Unit(DAYS, day, days, 604800, 86400)
+                        new Unit(DAYS, day, days, 604800, 86400),
+                        new Unit(WEEKS, week, weeks, 2629743, 604800),
+                        new Unit(MONTHS, month, months, 31556926, 2629743)
                 };
 
         long currentTime = System.currentTimeMillis();
@@ -75,15 +80,14 @@ public class DateRenderer {
      * @return The formatted time
      */
     public TimeAgo timeLeft(double time) {
-
-        TimeAgo result = null;
-
         Unit[] units = new Unit[]
                 {
                         new Unit(SECONDS, sec, secs, 60, 1),
                         new Unit(MINUTES, min, mins, 3600, 60),
                         new Unit(HOURS, hour, hours, 86400, 3600),
-                        new Unit(DAYS, day, days, 604800, 86400)
+                        new Unit(DAYS, day, days, 604800, 86400),
+                        new Unit(WEEKS, week, weeks, 2629743, 604800),
+                        new Unit(MONTHS, month, months, 31556926, 2629743)
                 };
 
         long currentTime = System.currentTimeMillis();
